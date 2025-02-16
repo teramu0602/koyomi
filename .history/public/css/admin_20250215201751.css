@@ -1,0 +1,174 @@
+@charset "UTF-8";
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 2145px;
+  padding: 40px 20px 40px 20px;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #ccc;
+}
+
+.logo {
+  border: 2px dashed black;
+  padding: 10px;
+  width: 100px;
+  text-align: center;
+  margin-right: auto;
+}
+
+.service-name {
+  font-size: 50px;
+  position: absolute; /* ページ全体に対して中央配置 */
+  left: 50%;
+  transform: translateX(-50%); /* 画面の中央に配置 */
+  text-align: center; /* 中央揃え */
+}
+
+main {
+  margin-top: 0px;
+  background: linear-gradient(to bottom, orange 0%, white 0%);
+}
+
+h2 {
+  font-size: 22px;
+  margin-bottom: 50px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input {
+  width: 300px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #666;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 50px;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #444;
+}
+
+.login-link {
+  margin-top: 40px;
+  font-size: 14px;
+  color: #555;
+}
+
+.checkbox {
+  margin: 30px;
+  display: flex; /* 横並びにする */
+  align-items: center;
+  margin-right: 170px;
+}
+
+.checkbox input[type=checkbox] {
+  margin-right: 10px; /* チェックボックスとテキストの間隔 */
+}
+
+.remember {
+  font-size: 14px;
+}
+
+input#remember {
+  width: 10px; /* 幅を300pxに設定 */
+  height: 20px; /* 高さを13pxに設定 */
+}
+
+.checkbox label {
+  font-weight: normal;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td {
+  border: 1px solid grey;
+  text-align: left; /* 左揃え */
+  vertical-align: top; /* 上揃え */
+  
+  padding: 0px 0px 150px 0px;
+ 
+}
+
+th {
+  background: white;
+  text-align: center;
+  padding: 10px;
+}
+
+.sunday {
+  background: pink;
+  color: red;
+}
+
+.red {
+  color: red;
+}
+
+.saturday {
+  background: pink;
+  color: blue;
+}
+
+.blue{
+  color: blue;
+}
+
+.next-month {
+  background: #ccc;
+  color: #666;
+}
+
+.month_toggle {
+  text-decoration: none;
+  color: black;
+}
+
+.nav-item {
+  list-style: none;
+  margin-right: 20px;
+}
+
+.pink { 
+  color: pink;
+  background-color: purple;
+}
+.prev-month, .next-month {
+  background: #ccc;
+  color: #666;
+}
+
+.switch {
+  background-color: orange;
+  padding: 0px 0px 50px 0px;
+}
