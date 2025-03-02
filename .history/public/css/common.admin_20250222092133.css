@@ -1,0 +1,12 @@
+.button {
+    background-color: aquamarine;
+    margin-left: 1000px;
+}
+.purple {
+    color: orange;
+}
+
+.switch_button{
+    float: right;
+    margin-right: 0px !important;
+}

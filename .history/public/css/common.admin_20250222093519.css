@@ -1,0 +1,23 @@
+html, body {
+    width: 100%;
+    margin: 0; /* 不要なマージンを削除 */
+    padding: 0; /* 不要なパディングを削除 */
+}
+
+.button {
+    background-color: aquamarine;
+    margin-left: 1000px;
+}
+.purple {
+    color: orange;
+}
+
+.switch_button{
+    display: flex !important;
+    justify-content: flex-end !important;
+    margin: 0;
+    margin-right: 30px !important;
+}
+.container {
+    
+}

@@ -11,7 +11,6 @@ header {
   justify-content: center;
   align-items: center;
   width: 100%;
- 
   padding: 40px 0px 40px 0px;
   background-color: #f8f8f8;
   border-bottom: 1px solid #ccc;
@@ -116,9 +115,7 @@ td {
   border: 1px solid grey;
   text-align: left; /* 左揃え */
   vertical-align: top; /* 上揃え */
-  
   padding: 0px 0px 150px 0px;
- 
 }
 
 th {
@@ -141,7 +138,7 @@ th {
   color: blue;
 }
 
-.blue{
+.blue {
   color: blue;
 }
 
@@ -160,10 +157,11 @@ th {
   margin-right: 20px;
 }
 
-.pink { 
+.pink {
   color: pink;
   background-color: purple;
 }
+
 .prev-month, .next-month {
   background: #ccc;
   color: #666;
@@ -181,7 +179,7 @@ th {
   margin-right: 400px;
 }
 
-.switch_button{
+.switch_button {
   margin-left: 400px;
 }
 
@@ -191,5 +189,3 @@ table {
   margin-right: auto; /* 右側の空白 */
   margin-bottom: 50px;
 }
-
-
