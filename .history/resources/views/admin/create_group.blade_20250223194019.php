@@ -1,1 +1,0 @@
-@extends('admin.calender_common')

@@ -1,0 +1,38 @@
+html, body {
+    width: 100%;
+    margin: 0; /* 不要なマージンを削除 */
+    padding: 0; /* 不要なパディングを削除 */
+}
+
+.container {
+    display: flex;
+    justify-content: right; /* 水平中央に配置 */
+
+
+}
+
+.btn {
+    margin-top: 0px;
+  }
+.btn1 {
+    margin-top: 0px;
+    padding: 0px 10px 0px 10px;
+    background-color:  #d3d3d3;
+    color: black;
+    border: 1px;
+    border-color: black;
+  }
+
+   
+    
+
+.purple {
+    color: blue;
+}
+
+.switch_button{
+    display: flex ;
+    justify-content: flex-end ;
+   
+
+}

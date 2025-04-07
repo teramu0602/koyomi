@@ -1,0 +1,73 @@
+html, body {
+    width: 100%;
+    margin: 0; /* 不要なマージンを削除 */
+    padding: 0; /* 不要なパディングを削除 */
+}
+
+.container {
+    display: flex;
+    justify-content: right; /* 水平中央に配置 */
+
+
+}
+
+.btn {
+    margin-top: 0px;
+    padding: 0px 10px 0px 10px;
+    background-color:  #d3d3d3;
+    color:  #444444;
+    border: 2px solid grey;
+  }
+.btn1 {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    padding: 0px 10px 0px 10px;
+    background-color:  #d3d3d3;
+    color:  #444444;
+    border: 2px solid grey;
+  }
+  .button-container {
+    display: flex;          /* 横並びにする */
+    justify-content: flex-end;
+    gap: 10px;              /* ボタン間の隙間 */
+    margin-top: 10px;       /* ボタンとリストアイテムの間に隙間を作る */
+
+    
+    
+
+}
+
+  .list-container {   
+    align-items: center; /* 縦方向の中央揃え */
+    gap: 10px;           /* 要素間の隙間 */
+    margin-left: auto; /* 左側の空白 */
+    margin-right: auto; /* 右側の空白 */
+    width: 40%; /* 幅を40%に設定 */
+    
+}
+
+.list-container li {
+    list-style: none;
+    display: flex;
+    justify-content: space-between; /* 左の要素とボタンを左右に配置 */
+    align-items: center;
+    border: 1.5px solid grey;
+    margin-bottom: 10px;
+    
+  
+
+
+}
+    
+
+
+.purple {
+    color: blue;
+}
+
+.switch_button{
+    display: flex ;
+    justify-content: flex-end ;
+   
+
+}
