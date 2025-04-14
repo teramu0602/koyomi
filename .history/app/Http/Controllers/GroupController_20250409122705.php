@@ -123,7 +123,7 @@ public function show($id, $year = null, $month = null)
         $query->where('group_id', $id);
     })
     ->get();
-
+    dd($post);
     $events = Calendar::whereYear('event_start_date', $year)
         ->whereMonth('event_start_date', $month)
         ->whereHas('groups', function ($query) use ($id) {
@@ -136,12 +136,6 @@ public function show($id, $year = null, $month = null)
     });
 
     return view('calender.group_home', compact('group','year', 'month','post','schedules','events'));
-}
-
-public function show1($id)
-{
-    $event = Calendar::with('user', 'calendar_groups.group')->findOrFail($id);
-    return view('admin.group_details', compact('event'));
 }
 
 }

@@ -10,7 +10,6 @@ use App\Http\Controllers\CreateGroupController;
 use App\Http\Controllers\JoinController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ScheduleController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -129,9 +128,4 @@ Route::get('/create_schedule_group/{group_id}', [CalendarController::class, 'gro
 Route::post('/create_schedule/store/group', [ScheduleController::class, 'storeGroup'])->name('group.schedule.store');
 
 
-// routes/web.php
-
-
-
-Route::get('/event/{id}', [GroupController::class, 'show1'])->name('group.details');
 

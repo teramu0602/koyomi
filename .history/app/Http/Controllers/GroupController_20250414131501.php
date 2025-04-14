@@ -141,7 +141,7 @@ public function show($id, $year = null, $month = null)
 public function show1($id)
 {
     $event = Calendar::with('user', 'calendar_groups.group')->findOrFail($id);
-    return view('admin.group_details', compact('event'));
+    return view('group.details', compact('event'));
 }
 
 }

@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\CalendarGroup;
 
 class Calendar extends Model
 {
@@ -33,9 +32,4 @@ class Calendar extends Model
     {
         return $this->belongsToMany(Group::class, 'calendar_groups', 'calendar_id', 'group_id');
     }
-
-    public function calendar_groups()
-{
-    return $this->hasMany(CalendarGroup::class, 'calendar_id');
-}
 }

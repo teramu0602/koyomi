@@ -118,9 +118,9 @@ $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
 
 <div class="group_color">
     <a class="who2">{{ $group->group_name }}の予定表</a>
-    <a class="month_toggle" href="{{ url('/group_home/' . $group->id . '/'. $prevYear . '/' . $prevMonth) }}">◀</a>
+    <a class="month_toggle" href="{{ url('/admin/home/' . $prevYear . '/' . $prevMonth) }}">◀</a>
     　{{ $year }}年　{{ $month }}月　
-    <a class="month_toggle" href="{{ url('/group_home/' . $group->id . '/'. $nextYear . '/' . $nextMonth) }}">▶</a>
+    <a class="month_toggle" href="{{ url('/admin/home/' . $nextYear . '/' . $nextMonth) }}">▶</a>
 
     <form action="{{ route('groups.list') }}" method="GET" style="display: inline;">
         <button type="submit" class="switch_button {{ request()->is('grouplist') ? 'active' : '' }}">グループ</button>
@@ -169,26 +169,28 @@ $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
                 $class = "saturday";
             }
         }
-        @endphp
-        <td class="{{ $class }}" onclick="window.location.href='飛びたいパス';">
-            <div>{{ $day }}</div>
-            <div>
-                @php
-                    $e = $post->filter(function($event) use ($year, $month, $day, $group) {
-                    return $event->event_start_date === sprintf('%04d-%02d-%02d', $year, $month, $day);                        
-                    });
-                @endphp
+        @php
+    $e = \Illuminate\Support\Collection::make();
+    foreach ($events as $event) {
+        if (\Carbon\Carbon::parse($event->event_start_date)->isSameDay(
+            \Carbon\Carbon::createFromDate($year, $month, $day)
+        )) {
+            $e->push($event);
+        }
+    }
+@endphp
 
-                @foreach($e as $event)
-                    <div class = "title1">{{ $event->title }}</div>
-                @endforeach
+@foreach ($e as $event)
+    <div>{{ $event->title }}</div>
+@endforeach
+
             </div>
         </td>
         @endforeach
     </tr>
     @endforeach
 </table>
-
+<p>{{$group->id}}</p>
 
 <script>
     function toggleMode() {

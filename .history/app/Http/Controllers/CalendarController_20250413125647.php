@@ -8,8 +8,6 @@ use App\Models\Group;
 use App\Models\UserGroup; 
 use App\Models\Calendar; 
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
-
 
 class CalendarController extends Controller
 {

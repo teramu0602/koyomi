@@ -138,10 +138,10 @@ public function show($id, $year = null, $month = null)
     return view('calender.group_home', compact('group','year', 'month','post','schedules','events'));
 }
 
-public function show1($id)
+public function show($id)
 {
-    $event = Calendar::with('user', 'calendar_groups.group')->findOrFail($id);
-    return view('admin.group_details', compact('event'));
+    $event = Event::with('user')->findOrFail($id);
+    return view('event.details', compact('event'));
 }
 
 }

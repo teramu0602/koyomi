@@ -2,9 +2,11 @@
 @section('title', 'スケジュール作成')
 @section('content')
 <form action="{{ route('group.schedule.store') }}" method="POST">
-@if(session('success'))
-        <p style="color: green;">{{ session('success') }}</p>
-    @endif
+  @if (session('success'))
+      <div class="alert alert-success">
+          {{ session('success') }}
+      </div>
+  @endif
   @csrf
   <!-- タイトル -->
   <label>タイトル：</label>

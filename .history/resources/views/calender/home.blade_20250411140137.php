@@ -116,11 +116,11 @@ $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
 
 
 
-<div class="group_color">
-    <a class="who2">{{ $group->group_name }}の予定表</a>
-    <a class="month_toggle" href="{{ url('/group_home/' . $group->id . '/'. $prevYear . '/' . $prevMonth) }}">◀</a>
+<div class="switch">
+    <a class="who">あなたの予定表</a>
+    <a class="month_toggle" href="{{ url('/admin/home/' . $prevYear . '/' . $prevMonth) }}">◀</a>
     　{{ $year }}年　{{ $month }}月　
-    <a class="month_toggle" href="{{ url('/group_home/' . $group->id . '/'. $nextYear . '/' . $nextMonth) }}">▶</a>
+    <a class="month_toggle" href="{{ url('/admin/home/' . $nextYear . '/' . $nextMonth) }}">▶</a>
 
     <form action="{{ route('groups.list') }}" method="GET" style="display: inline;">
         <button type="submit" class="switch_button {{ request()->is('grouplist') ? 'active' : '' }}">グループ</button>
@@ -130,7 +130,7 @@ $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
         <button type="submit" {{ request()->is('personal') ? 'active' : '' }}">個人</button>
     </form>
 
-    <form action="{{ route('groupCalendarAdd', ['group_id' => $group->id]) }}" method="GET" style="display: inline;">
+    <form action="{{ route('createschedule') }}" method="GET" style="display: inline;">
         <button type="submit" >予定作成</button>
     </form>
 </div>
@@ -174,11 +174,13 @@ $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
             <div>{{ $day }}</div>
             <div>
                 @php
-                    $e = $post->filter(function($event) use ($year, $month, $day, $group) {
-                    return $event->event_start_date === sprintf('%04d-%02d-%02d', $year, $month, $day);                        
+                    // 指定した日付に該当するイベントのみを取得
+                    $e = $post->filter(function($event) use ($year, $month, $day) {
+                        return $event->event_start_date === sprintf('%04d-%02d-%02d', $year, $month, $day)
+                        && Auth::check() // ログインしているか確認
+                        && $event->user_id === Auth::id(); // イベントの所有者がログインユーザーか確認
                     });
                 @endphp
-
                 @foreach($e as $event)
                     <div class = "title1">{{ $event->title }}</div>
                 @endforeach
@@ -195,6 +197,109 @@ $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
         alert("グループ / 個人の切り替え機能は後で実装");
     }
 </script>
+
+{{ $year }}
+@foreach ($post as $item)
+    <div class="event">
+        <h3>{{ $item->title }}</h3>
+        <p>開始日: {{ $item->event_start_date }} {{ $item->event_start_time }}</p>
+        <p>終了日: {{ $item->event_end_date }} {{ $item->event_end_time }}</p>
+        <p>{{ $item->content }}</p>  <!-- イベントの詳細 -->
+    </div>
+@endforeach
+
+
+
+<!-- お試し！！！カレンダーにsprintf('%04d-%02d-%02d', $year, $month, $day)を持たせたい -->
+explode()で日付部分だけ取得出来るかも？
+@php
+// カレンダー配列を作成
+$calendar = [];
+$row = [];
+for ($i = 0; $i < $startWeekday; $i++) {
+    $row[]=$lastmonthday++;
+}
+
+for ($day=1; $day <=$lastDay; $day++) {
+    $row[]=$day;
+    if (count($row)==7) {
+        $calendar[]=$row;
+        $row=[];
+    }
+}
+
+for ($i=0; $i < 6-$lastWeekday; $i++) {
+    $row[]=sprintf('%04d-%02d-%02d', $year, $month, $day++);
+}
+
+
+$calendar[]=$row;
+
+// 翌月の最初の数日をグレーにする
+$nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
+@endphp
+
+
+<table>
+    <tr>
+        <th class="red">日</th>
+        <th>月</th>
+        <th>火</th>
+        <th>水</th>
+        <th>木</th>
+        <th>金</th>
+        <th class="blue">土</th>
+    </tr>
+    @foreach ($calendar as $week)
+    <tr>
+        @foreach ($week as $day)
+        @php
+        $class = "";
+
+        if ($day !== "") {
+            // 前月の日付の判定
+            if ($loop->parent->first && $day > 20) {
+                $class = "prev-month";
+            }
+            // 翌月の日付の判定
+            elseif ($loop->parent->last && $day < 10) {
+                $class="next-month" ;
+            }
+            // 日曜（赤）
+            elseif ($loop->index % 7 == 0) {
+                $class = "sunday";
+            }
+            // 土曜（青）
+            elseif ($loop->index % 7 == 6) {
+                $class = "saturday";
+            }
+        }
+        @endphp
+        <td class="{{ $class }}" onclick="window.location.href='飛びたいパス';">
+            <div>{{ $day }}</div>
+            <div class = "calendar_title">
+                @php
+                    // 指定した日付に該当するイベントのみを取得
+                    $e = $post->filter(function($event) use ($year, $month, $day) {
+                        return $event->event_start_date === sprintf('%04d-%02d-%02d', $year, $month, $day)
+                        && Auth::check() // ログインしているか確認
+                        && $event->user_id === Auth::id(); // イベントの所有者がログインユーザーか確認
+                    });
+                @endphp
+                @foreach($e as $event)
+                    <div>{{ $event->title }}</div>
+                @endforeach
+            </div>
+        </td>
+        @endforeach
+    </tr>
+    @endforeach
+</table>
+
+<p>{{ Auth::id() }}</p>
+
+
+
 
 
 

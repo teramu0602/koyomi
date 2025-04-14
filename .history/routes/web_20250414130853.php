@@ -10,7 +10,7 @@ use App\Http\Controllers\CreateGroupController;
 use App\Http\Controllers\JoinController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ScheduleController;
-
+use App\Http\Controllers\EventController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -133,5 +133,5 @@ Route::post('/create_schedule/store/group', [ScheduleController::class, 'storeGr
 
 
 
-Route::get('/event/{id}', [GroupController::class, 'show1'])->name('group.details');
+Route::get('/event/{id}', [EventController::class, 'show'])->name('event.details');
 

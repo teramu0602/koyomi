@@ -133,5 +133,5 @@ Route::post('/create_schedule/store/group', [ScheduleController::class, 'storeGr
 
 
 
-Route::get('/event/{id}', [GroupController::class, 'show1'])->name('group.details');
+Route::get('/event/{id}', [GroupController::class, 'show'])->name('event.details');
 

@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Group;
 use App\Models\UserGroup;
-use App\Models\Calendar; 
-use Carbon\Carbon;
 
 class GroupController extends Controller
 {
@@ -111,37 +109,30 @@ public function leaveGroup($groupId)
     return redirect()->route('groups.list')->with('success', 'グループから退会しました。');
 }
 
-public function show($id, $year = null, $month = null)
+public function show($id)
 {
-    $group = Group::findOrFail($id);
+    $group = Group::findOrFail($id,$year = null, $month = null);
 
     $year = $year ?? Carbon::now()->year;
     $month = $month ?? Carbon::now()->month;
-
-    // 該当グループの予定だけ取得（中間テーブルから絞り込む）
-    $post = Calendar::whereHas('groups', function ($query) use ($id) {
-        $query->where('group_id', $id);
-    })
+    // 最新の投稿データを1件取得
+    $post = Calendar::all(); // もしくは、必要な条件でデータを取得
+    $a = Calendar::all();
+    $events = Calendar::whereYear('event_start_date', $year)
+    ->whereMonth('event_start_date', $month)
     ->get();
 
-    $events = Calendar::whereYear('event_start_date', $year)
-        ->whereMonth('event_start_date', $month)
-        ->whereHas('groups', function ($query) use ($id) {
-            $query->where('group_id', $id);
-        })
-        ->get();
 
-    $schedules = $events->groupBy(function ($schedule) {
-        return date('j', strtotime($schedule->event_start_date));
+    $schedules = Calendar::whereYear('event_start_date', $year)
+    ->whereMonth('event_start_date', $month)
+    ->get()
+    ->groupBy(function ($schedule) {
+        return date('j', strtotime($schedule->date)); // 日ごとにグループ化
     });
 
-    return view('calender.group_home', compact('group','year', 'month','post','schedules','events'));
-}
 
-public function show1($id)
-{
-    $event = Calendar::with('user', 'calendar_groups.group')->findOrFail($id);
-    return view('admin.group_details', compact('event'));
+
+    return view('calender.group_home', compact('group'));
 }
 
 }

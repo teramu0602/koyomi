@@ -173,11 +173,12 @@ $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
         <td class="{{ $class }}" onclick="window.location.href='飛びたいパス';">
             <div>{{ $day }}</div>
             <div>
-                @php
-                    $e = $post->filter(function($event) use ($year, $month, $day, $group) {
-                    return $event->event_start_date === sprintf('%04d-%02d-%02d', $year, $month, $day);                        
-                    });
-                @endphp
+            @php
+    $e = $post->filter(function($event) use ($year, $month, $day, $group) {
+        return $event->event_start_date === sprintf('%04d-%02d-%02d', $year, $month, $day)
+        
+    });
+@endphp
 
                 @foreach($e as $event)
                     <div class = "title1">{{ $event->title }}</div>

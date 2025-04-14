@@ -122,7 +122,7 @@ public function index($year = null, $month = null)
     });
 
     // ビューにデータを渡す
-    return view('calender.home', compact('year', 'month','post','a','events', 'schedules'));
+    return view('calender.home', compact('year', 'month','post','a','event', 'schedules'));
 }
 // public function groupCalendarAdd(Request $request){
 //     return view('admin.create_group_schedule', ['group_id' => $request->group_id]);

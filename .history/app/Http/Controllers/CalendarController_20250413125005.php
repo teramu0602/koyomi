@@ -8,8 +8,6 @@ use App\Models\Group;
 use App\Models\UserGroup; 
 use App\Models\Calendar; 
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
-
 
 class CalendarController extends Controller
 {
@@ -99,17 +97,10 @@ public function index($year = null, $month = null)
     // 最新の投稿データを1件取得
     $post = Calendar::all(); // もしくは、必要な条件でデータを取得
     $a = Calendar::all();
-    $events = Calendar::whereYear('event_start_date', $year)
-    ->whereMonth('event_start_date', $month)
-    ->get();
+
     $events = Calendar::whereYear('event_start_date', $year)
     ->whereMonth('event_start_date', $month)
     ->whereDoesntHave('calendar_groups') // グループに属していないカレンダー
-    ->get();
-    $events = Calendar::whereYear('event_start_date', $year)
-    ->whereMonth('event_start_date', $month)
-    ->where('user_id', Auth::id())
-    ->whereDoesntHave('calendar_groups') // グループ予定に属していない
     ->get();
 
 

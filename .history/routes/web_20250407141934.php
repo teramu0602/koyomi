@@ -10,7 +10,6 @@ use App\Http\Controllers\CreateGroupController;
 use App\Http\Controllers\JoinController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ScheduleController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,11 +62,6 @@ Route::get('/calendar', [CalendarController::class, 'index'],function () {
     return view('calender/home');
 })->name('calendar')->middleware('auth');
 
-Route::get('/group_home',function () {
-    return view('calender.group_home');
-})->name('grouphome');
-Route::get('/group_home/{id}', [GroupController::class, 'show'])->name('group.home');
-Route::get('/group_home/{id}/{year}/{month}', [GroupController::class, 'show'])->name('admin.group.calendar.show');
 
 Route::get('/admin/home', [CalendarController::class, 'index']);
 Route::get('/admin/home/{year}/{month}', [CalendarController::class, 'show' ])->name('admin.calendar.show');
@@ -116,7 +110,10 @@ Route::get('/a', function () {
     return view('calender.calendar');
 });
 
-
+Route::get('/group_home',function () {
+    return view('calender.group_home');
+})->name('grouphome');
+Route::get('/group_home/{id}', [GroupController::class, 'show'])->name('group.home');
 
 //スケジュール作成画面
 Route::get('/create_schedule', function () {
@@ -129,9 +126,4 @@ Route::get('/create_schedule_group/{group_id}', [CalendarController::class, 'gro
 Route::post('/create_schedule/store/group', [ScheduleController::class, 'storeGroup'])->name('group.schedule.store');
 
 
-// routes/web.php
-
-
-
-Route::get('/event/{id}', [GroupController::class, 'show1'])->name('group.details');
 
