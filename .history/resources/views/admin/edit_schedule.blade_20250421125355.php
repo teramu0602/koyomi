@@ -1,4 +1,4 @@
-@extends('layouts.admin_calender')
+@extends('layouts.app')
 
 @section('title', 'イベント編集')
 

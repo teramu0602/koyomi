@@ -144,15 +144,7 @@ class ScheduleController extends Controller
 
     $event->delete();
 
-    // リダイレクト先を分岐
-    if ($event->groups->isNotEmpty()) {
-        $groupId = $event->groups->first()->id; // 最初のグループIDを取得
-        return redirect()->route('group.home', ['id' => $groupId])
-                         ->with('success', 'イベントを削除しました。');
-    } else {
-        return redirect()->route('calendar')
-                         ->with('success', 'イベントを削除しました。');
-    }
+    return redirect()->route('calendar')->with('success', 'イベントを削除しました。');
 }
 
     

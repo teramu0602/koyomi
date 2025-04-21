@@ -129,6 +129,10 @@ $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
     <form action="{{ route('groups.list') }}" method="GET" style="display: inline;">
         <button type="submit" {{ request()->is('personal') ? 'active' : '' }}">個人</button>
     </form>
+
+    <form action="{{ route('createschedule') }}" method="GET" style="display: inline;">
+        <button type="submit" >予定作成</button>
+    </form>
 </div>
 
 <table>
@@ -166,7 +170,25 @@ $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
             }
         }
         @endphp
-        <td class="{{ $class }}" onclick="window.location.href='飛びたいパス';">{{ $day }}</td>
+        <td class="{{ $class }}" onclick="window.location.href='飛びたいパス';">
+            <div>{{ $day }}</div>
+            <div>
+                @php
+                    // 指定した日付に該当するイベントのみを取得
+                    $e = $post->filter(function($event) use ($year, $month, $day) {
+                        return $event->event_start_date === sprintf('%04d-%02d-%02d', $year, $month, $day)
+                        && Auth::check() // ログインしているか確認
+                        && $event->user_id === Auth::id() // イベントの所有者がログインユーザーか確認
+                        && $event->calendar_groups->isEmpty(); // ← これがポイント
+                    });
+                @endphp
+                @foreach($e as $event)
+                    <div class = "title1">
+                        {{ $event->title }}
+                    </div>
+                @endforeach
+            </div>
+        </td>
         @endforeach
     </tr>
     @endforeach
@@ -179,6 +201,107 @@ $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
     }
 </script>
 
-<h2>{{ $post->title ?? 'タイトルなし' }}</h2>
+
+
+
+
+
+<!-- お試し！！！カレンダーにsprintf('%04d-%02d-%02d', $year, $month, $day)を持たせたい -->
+
+@php
+// カレンダー配列を作成
+$calendar = [];
+$row = [];
+for ($i = 0; $i < $startWeekday; $i++) {
+    $row[]=$lastmonthday++;
+}
+
+for ($day=1; $day <=$lastDay; $day++) {
+    $row[]=$day;
+    if (count($row)==7) {
+        $calendar[]=$row;
+        $row=[];
+    }
+}
+
+for ($i=0; $i < 6-$lastWeekday; $i++) {
+    $row[]=sprintf('%04d-%02d-%02d', $year, $month, $day++);
+}
+
+
+$calendar[]=$row;
+
+// 翌月の最初の数日をグレーにする
+$nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
+@endphp
+
+
+<table>
+    <tr>
+        <th class="red">日</th>
+        <th>月</th>
+        <th>火</th>
+        <th>水</th>
+        <th>木</th>
+        <th>金</th>
+        <th class="blue">土</th>
+    </tr>
+    @foreach ($calendar as $week)
+    <tr>
+        @foreach ($week as $day)
+        @php
+        $class = "";
+
+        if ($day !== "") {
+            // 前月の日付の判定
+            if ($loop->parent->first && $day > 20) {
+                $class = "prev-month";
+            }
+            // 翌月の日付の判定
+            elseif ($loop->parent->last && $day < 10) {
+                $class="next-month" ;
+            }
+            // 日曜（赤）
+            elseif ($loop->index % 7 == 0) {
+                $class = "sunday";
+            }
+            // 土曜（青）
+            elseif ($loop->index % 7 == 6) {
+                $class = "saturday";
+            }
+        }
+        @endphp
+        <td class="{{ $class }}" onclick="window.location.href='飛びたいパス';">
+            <div>{{ $day }}</div>
+            {{-- イベント数のバッジ（0件は表示しない） --}}
+            @if ($e->count() > 0)
+                <div class="event-count-badge">
+                    {{ $e->count() }}
+                </div>
+            @endif
+            <div class = "calendar_title">
+                @php
+                    // 指定した日付に該当するイベントのみを取得
+                    $e = $post->filter(function($event) use ($year, $month, $day) {
+                        return $event->event_start_date === sprintf('%04d-%02d-%02d', $year, $month, $day)
+                        && Auth::check() // ログインしているか確認
+                        && $event->user_id === Auth::id() // イベントの所有者がログインユーザーか確認
+                        && $event->calendar_groups->isEmpty(); // ← これがポイント
+                    });
+                @endphp
+                <!-- @foreach($e as $event)
+                    <div>{{ $event->title }}</div>
+                @endforeach -->
+                @foreach($e as $event)
+                <div>
+                    <a href="{{ route('group.details', ['id' => $event->id]) }}">{{ $event->title }}</a>
+                </div>
+        @endforeach
+            </div>
+        </td>
+        @endforeach
+    </tr>
+    @endforeach
+</table>
 
 @endsection

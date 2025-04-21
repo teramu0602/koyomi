@@ -49,9 +49,10 @@ Route::get('/admin/home', function () {
     return view('calender/home');
 });
 
-Route::get('/calendar', [CalendarController::class, 'index'],function () {
-    return view('calender/home');
-})->name('calendar')->middleware('auth');
+Route::get('/calendar', [CalendarController::class, 'index'])
+    ->name('calendar')
+    ->middleware('auth');
+
 
 Route::get('/group_home',function () {
     return view('calender.group_home');
@@ -119,3 +120,6 @@ Route::get('/event/{id}/edit', [ScheduleController::class, 's_edit'])->name('gro
 
 // 編集内容を保存する（フォーム送信先）
 Route::put('/event/{id}', [ScheduleController::class, 's_update'])->name('group.update');
+
+
+Route::delete('/event/{id}', [ScheduleController::class, 'destroy'])->name('group.destroy');

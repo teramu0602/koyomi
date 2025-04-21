@@ -271,16 +271,16 @@ $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
             }
         }
         @endphp
-        <td class="{{ $class }}" style="position: relative;" onclick="window.location.href='飛びたいパス';">
-            @php
-                // 指定した日付に該当するイベントのみを取得
-                $e = $post->filter(function($event) use ($year, $month, $day) {
-                    return $event->event_start_date === sprintf('%04d-%02d-%02d', $year, $month, $day)
-                    && Auth::check() // ログインしているか確認
-                    && $event->user_id === Auth::id() // イベントの所有者がログインユーザーか確認
-                    && $event->calendar_groups->isEmpty(); // ← これがポイント
-                });
-            @endphp
+        <td class="{{ $class }}" onclick="window.location.href='飛びたいパス';">
+        @php
+                    // 指定した日付に該当するイベントのみを取得
+                    $e = $post->filter(function($event) use ($year, $month, $day) {
+                        return $event->event_start_date === sprintf('%04d-%02d-%02d', $year, $month, $day)
+                        && Auth::check() // ログインしているか確認
+                        && $event->user_id === Auth::id() // イベントの所有者がログインユーザーか確認
+                        && $event->calendar_groups->isEmpty(); // ← これがポイント
+                    });
+                @endphp
             <div>{{ $day }}</div>
             {{-- イベント数のバッジ（0件は表示しない） --}}
             @if ($e->count() > 0)

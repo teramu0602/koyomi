@@ -23,6 +23,9 @@ header {
   text-align: center;
   margin-right: auto;
   margin-left: 20px;
+  text-decoration: none; /* 下線を消す */
+  display: block;
+  color: #000;
 }
 
 .service-name {
@@ -52,6 +55,7 @@ form {
 
 label {
   font-weight: bold;
+
 }
 
 input {
@@ -117,6 +121,15 @@ td {
   text-align: left; /* 左揃え */
   vertical-align: top; /* 上揃え */
   padding: 0px 0px 150px 0px;
+  width: 100px; /* お好みで調整 */
+  height: 80px; /* お好みで調整 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.title1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 th {
@@ -209,3 +222,131 @@ table {
 .dropdown-menu {
   z-index: 1050;
 }
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  z-index: 1000;
+  min-width: 10rem;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-menu a {
+  color: #333; /* テキストカラー */
+  padding: 10px 15px; /* 内側の余白 */
+  text-decoration: none; /* 下線を消す */
+  display: block; /* 幅いっぱいクリック可能に */
+  transition: background-color 0.2s ease; /* ホバー時のスムーズな変化 */
+}
+
+.dropdown-menu a:hover {
+  background-color: #f8f9fa; /* ホバー時の背景色 */
+  color: #0056b3; /* ホバー時の文字色 */
+}
+
+.nav-link.dropdown-toggle {
+  color: #000 !important; /* 黒にする */
+  text-decoration: none; /* 必要に応じて下線を消す */
+}
+
+.nav-link.dropdown-toggle:hover {
+  color: #333 !important; /* ホバー時の色を少し変える（任意）*/
+}
+
+.h1 {
+  margin-top: 70px;
+  margin-bottom: 40px;
+}
+.plist {
+  display: flex;
+  justify-content: first baseline;
+  margin-top: 50px;
+}
+.joinctn{
+  text-align: left;
+  margin-left: auto; /* 左側の空白 */
+  margin-right: auto; /* 右側の空白 */
+  margin-top: 80px;
+  margin-bottom: 60px;
+}
+.form{
+  gap: 30px;
+}
+
+.check_box {
+  margin: 0px 0 0 0;
+  width: 5%;
+}
+
+.editckb {
+  justify-content: first baseline;
+  width: 310px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+
+}
+
+.label_n {
+  font-weight: normal;
+
+}
+
+.p_c {
+
+  width: 315px;
+  font-size: 12px;
+  margin: 0px;
+  display: inline-block;
+  overflow: visible;
+}
+
+.group_color{
+  background-color: rgb(19, 156, 19);
+  padding: 0px 0px 35px 0px;
+  font-size: 20px;
+}
+
+.who2 {
+  background-color: rgb(160, 212, 153);
+  font-size: 20px;
+  margin-right: 400px;
+}
+
+.none {
+  color: black; /* リンクの色を黒にする */
+  text-decoration: none; /* 下線を消す */
+}
+
+.schedule {
+  background-color: #8888ff;
+  color: black;
+  padding: 5px;
+  margin: 3px 0;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.calendar_title {
+  color: #0062cc;
+}
+
+<style>
+.event-count-badge {
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    background-color: #ff5e5e;
+    color: white;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 50%;
+    z-index: 10;
+}
+</style>
