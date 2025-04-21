@@ -26,15 +26,10 @@
         @endforeach
 
         <!-- 編集ボタン -->
-        @php
-        $canEdit = $event->groups->isEmpty() || $event->groups->contains(function ($group) {
-            return $group->edit_flg == 1;
-        });
-        @endphp
-
-        @if ($canEdit)
-            <a href="{{ route('group.edit', ['id' => $event->id]) }}" class="btn btn-primary">編集</a>
-        @endif
-
+        @foreach ($event->groups as $group)
+            @if ($group->edit_flg == 1)
+                <a href="{{ route('group.edit', ['id' => $group->id]) }}" class="btn btn-primary">編集</a>
+            @endif
+        @endforeach
     </div>
 @endsection

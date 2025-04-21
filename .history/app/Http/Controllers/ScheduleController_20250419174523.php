@@ -84,7 +84,7 @@ class ScheduleController extends Controller
     {
         $event = Calendar::with('groups')->findOrFail($id);
     
-        $canEdit = $event->groups->isEmpty() || $event->groups->contains(function ($group) {
+        $canEdit = $event->groups->contains(function ($group) {
             return $group->edit_flg == 1;
         });
     

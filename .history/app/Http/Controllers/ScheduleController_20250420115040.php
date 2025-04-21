@@ -84,9 +84,10 @@ class ScheduleController extends Controller
     {
         $event = Calendar::with('groups')->findOrFail($id);
     
-        $canEdit = $event->groups->isEmpty() || $event->groups->contains(function ($group) {
-            return $group->edit_flg == 1;
-        });
+    // グループが無い場合は編集OK、それ以外はedit_flgで判定
+    $canEdit = $event->groups->isEmpty() || $event->groups->contains(function ($group) {
+        return $group->edit_flg == 1;
+    });
     
         if (!$canEdit) {
             return redirect()->back()->with('error', 'このイベントは編集できません。');

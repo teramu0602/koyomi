@@ -138,12 +138,46 @@ public function show($id, $year = null, $month = null)
     return view('calender.group_home', compact('group','year', 'month','post','schedules','events'));
 }
 
-public function showEvent($id)
+public function show1($id)
 {
     $event = Calendar::with('user', 'calendar_groups.group')->findOrFail($id);
     return view('admin.group_details', compact('event'));
 }
 
+public function s_edit($id){
+    return view('admion.edit_schegule', compact('group'));
+}
 
+public function s_update(Request $request, $id)
+{
+    $event = Calendar::with('groups')->findOrFail($id);
+
+    // 編集可能か再チェック（念のため）
+    $canEdit = $event->groups->contains(function ($group) {
+        return $group->edit_flg == 1;
+    });
+
+    if (!$canEdit) {
+        return redirect()->back()->with('error', 'このイベントは編集できません。');
+    }
+
+    $request->validate([
+        'event_start_date' => 'required|date',
+        'event_start_time' => 'required',
+        'event_end_date' => 'nullable|date',
+        'event_end_time' => 'nullable',
+        'content' => 'nullable|string|max:1000',
+    ]);
+
+    $event->update([
+        'event_start_date' => $request->event_start_date,
+        'event_start_time' => $request->event_start_time,
+        'event_end_date' => $request->event_end_date,
+        'event_end_time' => $request->event_end_time,
+        'content' => $request->content,
+    ]);
+
+    return redirect()->route('admion.edit_schegule', ['id' => $event->id])->with('success', 'イベント内容を更新しました。');
+}
 
 }

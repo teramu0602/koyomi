@@ -25,16 +25,13 @@
             <p>{{ $group->group_name }}</p>
         @endforeach
 
-        <!-- 編集ボタン -->
-        @php
-        $canEdit = $event->groups->isEmpty() || $event->groups->contains(function ($group) {
-            return $group->edit_flg == 1;
-        });
-        @endphp
+        //編集ボタン
+        @foreach ($event->groups as $group)
+            <p>{{ $group->group_name }}</p>
 
-        @if ($canEdit)
-            <a href="{{ route('group.edit', ['id' => $event->id]) }}" class="btn btn-primary">編集</a>
-        @endif
-
+            @if ($group->edit_flg == 1)
+                <a href="{{ route('group.details', ['id' => $group->id]) }}" class="btn btn-primary">編集</a>
+            @endif
+        @endforeach
     </div>
 @endsection

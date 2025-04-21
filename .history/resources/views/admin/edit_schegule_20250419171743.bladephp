@@ -1,0 +1,29 @@
+@extends('layouts.app')
+
+@section('title', 'グループ編集')
+
+@section('content')
+    <div class="container mt-4">
+        <h2>グループ編集</h2>
+
+        <form action="{{ route('group.update', ['id' => $group->id]) }}" method="POST">
+            @csrf
+            @method('PUT')
+
+            <div class="mb-3">
+                <label for="group_name" class="form-label">グループ名</label>
+                <input type="text" name="group_name" class="form-control" value="{{ old('group_name', $group->group_name) }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="edit_flg" class="form-label">編集フラグ</label>
+                <select name="edit_flg" class="form-control">
+                    <option value="1" {{ $group->edit_flg == 1 ? 'selected' : '' }}>編集可能</option>
+                    <option value="0" {{ $group->edit_flg == 0 ? 'selected' : '' }}>編集不可</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">更新</button>
+        </form>
+    </div>
+@endsection

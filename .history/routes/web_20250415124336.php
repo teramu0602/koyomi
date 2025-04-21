@@ -48,7 +48,17 @@ Route::get('/signup', function () {
 Route::get('/admin/home', function () {
     return view('calender/home');
 });
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// Route::get('/home', function () {
+//     return view('calender/home');
+// })->name('home');
+
+//ログイン成功で個人カレンダーへいく  元のルート
+// Route::get('/calendar', function () {
+//     return view('calender/home');
+// })->name('calendar')->middleware('auth');
+//ログイン成功で個人カレンダーへいく  新しいルート
 Route::get('/calendar', [CalendarController::class, 'index'],function () {
     return view('calender/home');
 })->name('calendar')->middleware('auth');
@@ -112,10 +122,5 @@ Route::get('/create_schedule_group/{group_id}', [CalendarController::class, 'gro
 Route::post('/create_schedule/store/group', [ScheduleController::class, 'storeGroup'])->name('group.schedule.store');
 
 //show1 名前変更
-Route::get('/event/{id}', [GroupController::class, 'showEvent'])->name('group.details');
+Route::get('/event/{id}', [GroupController::class, 'show1'])->name('group.details');
 
-// 編集画面の表示（フォームを出す）
-Route::get('/event/{id}/edit', [ScheduleController::class, 's_edit'])->name('group.edit');
-
-// 編集内容を保存する（フォーム送信先）
-Route::put('/event/{id}', [ScheduleController::class, 's_update'])->name('group.update');

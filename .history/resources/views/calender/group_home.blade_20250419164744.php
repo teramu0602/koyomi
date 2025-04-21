@@ -236,7 +236,7 @@ $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
             }
         }
         @endphp
-        <td class="{{ $class }}">
+        <td class="{{ $class }}" onclick="window.location.href='飛びたいパス';">
             <div>{{ $day }}</div>
             <div>
                 @php
@@ -246,9 +246,7 @@ $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
                 @endphp
 
                 @foreach($e as $event)
-                    <div>
-                        <a href="{{ route('group.details', ['id' => $event->id]) }}">{{ $event->title }}</a>
-                    </div>
+                    <div class = "title1">{{ $event->title }}</div>
                 @endforeach
             </div>
         </td>

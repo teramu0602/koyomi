@@ -84,7 +84,7 @@ class ScheduleController extends Controller
     {
         $event = Calendar::with('groups')->findOrFail($id);
     
-        $canEdit = $event->groups->isEmpty() || $event->groups->contains(function ($group) {
+        $canEdit = $event->groups->contains(function ($group) {
             return $group->edit_flg == 1;
         });
     
@@ -92,7 +92,7 @@ class ScheduleController extends Controller
             return redirect()->back()->with('error', 'このイベントは編集できません。');
         }
     
-        return view('admin.edit_schedule', compact('event'));
+        return view('admin.edit_schegule', compact('event'));/home/ec2-user/environment/koyomi/resources/views/admin/.bladephp
     }
     
 

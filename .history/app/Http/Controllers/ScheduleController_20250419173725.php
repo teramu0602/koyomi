@@ -84,7 +84,7 @@ class ScheduleController extends Controller
     {
         $event = Calendar::with('groups')->findOrFail($id);
     
-        $canEdit = $event->groups->isEmpty() || $event->groups->contains(function ($group) {
+        $canEdit = $event->groups->contains(function ($group) {
             return $group->edit_flg == 1;
         });
     
@@ -92,11 +92,13 @@ class ScheduleController extends Controller
             return redirect()->back()->with('error', 'このイベントは編集できません。');
         }
     
-        return view('admin.edit_schedule', compact('event'));
+        return view('events.edit', compact('event'));
     }
     
 
-
+    public function s_edit($id){
+        return view('admion.edit_schegule', compact('group'));
+    }
     
     public function s_update(Request $request, $id)
     {

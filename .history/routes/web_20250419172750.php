@@ -112,10 +112,7 @@ Route::get('/create_schedule_group/{group_id}', [CalendarController::class, 'gro
 Route::post('/create_schedule/store/group', [ScheduleController::class, 'storeGroup'])->name('group.schedule.store');
 
 //show1 名前変更
-Route::get('/event/{id}', [GroupController::class, 'showEvent'])->name('group.details');
+Route::get('/event/{id}', [GroupController::class, 'show1'])->name('group.details');
 
-// 編集画面の表示（フォームを出す）
-Route::get('/event/{id}/edit', [ScheduleController::class, 's_edit'])->name('group.edit');
 
-// 編集内容を保存する（フォーム送信先）
-Route::put('/event/{id}', [ScheduleController::class, 's_update'])->name('group.update');
+Route::get('/event/{id}/edit', [ScheduleController::class, 's_update'])->name('group.edit');

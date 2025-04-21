@@ -27,14 +27,14 @@
 
         <!-- 編集ボタン -->
         @php
-        $canEdit = $event->groups->isEmpty() || $event->groups->contains(function ($group) {
-            return $group->edit_flg == 1;
-        });
-        @endphp
+    $canEdit = $event->groups->isEmpty() || $event->groups->contains(function ($group) {
+        return $group->edit_flg == 1;
+    });
+@endphp
 
-        @if ($canEdit)
-            <a href="{{ route('group.edit', ['id' => $event->id]) }}" class="btn btn-primary">編集</a>
-        @endif
+@if ($canEdit)
+    <a href="{{ route('group.edit', ['id' => $event->id]) }}" class="btn btn-primary">編集</a>
+@endif
 
     </div>
 @endsection

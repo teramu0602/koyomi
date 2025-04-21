@@ -196,47 +196,7 @@ $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
     }
 </script>
 
-
-
-
-
-
-<table>
-    <tr>
-        <th class="red">日</th>
-        <th>月</th>
-        <th>火</th>
-        <th>水</th>
-        <th>木</th>
-        <th>金</th>
-        <th class="blue">土</th>
-    </tr>
-    @foreach ($calendar as $week)
-    <tr>
-        @foreach ($week as $day)
-        @php
-        $class = "";
-
-        if ($day !== "") {
-            // 前月の日付の判定
-            if ($loop->parent->first && $day > 20) {
-                $class = "prev-month";
-            }
-            // 翌月の日付の判定
-            elseif ($loop->parent->last && $day < 10) {
-                $class="next-month" ;
-            }
-            // 日曜（赤）
-            elseif ($loop->index % 7 == 0) {
-                $class = "sunday";
-            }
-            // 土曜（青）
-            elseif ($loop->index % 7 == 6) {
-                $class = "saturday";
-            }
-        }
-        @endphp
-        <td class="{{ $class }}">
+<td class="{{ $class }}" onclick="window.location.href='飛びたいパス';">
             <div>{{ $day }}</div>
             <div>
                 @php
@@ -246,9 +206,7 @@ $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
                 @endphp
 
                 @foreach($e as $event)
-                    <div>
-                        <a href="{{ route('group.details', ['id' => $event->id]) }}">{{ $event->title }}</a>
-                    </div>
+                    <div class = "title1">{{ $event->title }}</div>
                 @endforeach
             </div>
         </td>
@@ -256,5 +214,7 @@ $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
     </tr>
     @endforeach
 </table>
+
+
 
 @endsection

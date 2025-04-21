@@ -236,7 +236,7 @@ $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
             }
         }
         @endphp
-        <td class="{{ $class }}">
+        <td class="{{ $class }}" onclick="window.location.href='飛びたいパス';">
             <div>{{ $day }}</div>
             <div>
                 @php
