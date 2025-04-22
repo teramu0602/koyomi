@@ -24,6 +24,10 @@
 <p>まだグループがありません。</p>
 @else
 <ul class="list-container">
+
+
+
+
     @foreach ($userGroups as $userGroup)
     @php $group = $userGroup->group; @endphp
     <li>
@@ -46,7 +50,7 @@
             </form>
         </div>
     </li>
-    @endforeach
+@endforeach
     <p class="plist">※自身で作成したグループのみ詳細からグループ設定を変更することが出来ます。</p>
 </ul>
 @endif

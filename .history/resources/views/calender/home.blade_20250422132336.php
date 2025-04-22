@@ -212,22 +212,24 @@ $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
 // カレンダー配列を作成
 $calendar = [];
 $row = [];
-for ($i = 0,$lastmonthday=$lastmonthday-$startWeekday; $i < $startWeekday; $i++) {
-    $row[] = sprintf('%04d-%02d-%02d', $prevYear, $prevMonth, $lastmonthday++);
+for ($i = 0; $i < $startWeekday; $i++) {
+    $row[]=$lastmonthday++;
 }
 
-for ($day = 1; $day <= $lastDay; $day++) {
-    $row[] = sprintf('%04d-%02d-%02d', $year, $month, $day);
-    if (count($row) == 7) {
-        $calendar[] = $row;
-        $row = [];
+for ($day=1; $day <=$lastDay; $day++) {
+    $row[]=$day;
+    if (count($row)==7) {
+        $calendar[]=$row;
+        $row=[];
     }
 }
 
-for ($i = 0, $day = 1; $i < 6 - $lastWeekday; $i++, $day++) {
-    $row[] = sprintf('%04d-%02d-%02d', $nextYear, $nextMonth, $day);
+for ($i=0,$day=1; $i < 6-$lastWeekday; $i++) {
+    $row[]=sprintf('%04d-%02d-%02d', $year, $month, $day++);
 }
-$calendar[] = $row;
+
+
+$calendar[]=$row;
 
 // 翌月の最初の数日をグレーにする
 $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
@@ -251,18 +253,13 @@ $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
         $class = "";
 
         if ($day !== "") {
-            $dayDate = \Carbon\Carbon::parse($day); // Carbonで日付を扱いやすくする
-            $dayYear = $dayDate->year;
-            $dayMonth = $dayDate->month;
-            $dayDay = $dayDate->day;
-
             // 前月の日付の判定
-            if ($loop->parent->first && ($dayMonth != $month)) {
+            if ($loop->parent->first && $day > 20) {
                 $class = "prev-month";
             }
             // 翌月の日付の判定
-            elseif ($loop->parent->last && ($dayMonth != $month)) {
-                $class = "next-month";
+            elseif ($loop->parent->last && $day < 10) {
+                $class="next-month" ;
             }
             // 日曜（赤）
             elseif ($loop->index % 7 == 0) {
@@ -273,19 +270,18 @@ $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
                 $class = "saturday";
             }
         }
-
         @endphp
-        <td class="{{ $class }}" style="position: relative;" >
+        <td class="{{ $class }}" style="position: relative;" onclick="window.location.href='飛びたいパス';">
             @php
                 // 指定した日付に該当するイベントのみを取得
-                $e = $post->filter(function($event) use ($day) {
-                    return $event->event_start_date === $day
+                $e = $post->filter(function($event) use ($year, $month, $day) {
+                    return $event->event_start_date === sprintf('%04d-%02d-%02d', $year, $month, $day)
                     && Auth::check() // ログインしているか確認
                     && $event->user_id === Auth::id() // イベントの所有者がログインユーザーか確認
                     && $event->calendar_groups->isEmpty(); // 個人の予定かどうかを識別
                 });
             @endphp
-            <div>{{ (int)substr($day, 8, 2) }}</div>
+            <div>{{ $day }}</div>
             {{-- イベント数のバッジ（0件は表示しない） --}}
             @if ($e->count() > 0)
                 <div class="event-count-badge">

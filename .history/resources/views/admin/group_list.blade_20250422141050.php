@@ -24,6 +24,36 @@
 <p>まだグループがありません。</p>
 @else
 <ul class="list-container">
+    <!-- @foreach ($groups as $group)
+    <li>
+         <span class="group-name">
+        <a class="none" href="{{ route('group.home', ['id' => $group->id]) }}">{{ $group->group_name }}</a>
+        
+        </span> 
+        <span class="group-name">
+    <a class="none" href="{{ route('group.home', ['id' => $group->id]) }}">
+        {{ $group->group_name }}
+        @if ($group->owner_flg == 1)
+            <span style="color: gold;">★</span>
+        @endif
+    </a>
+</span>
+        <div class="button-container">
+            <form action="{{ route('groups.edit', $group->id) }}" method="GET" style="display:inline;">
+                <button type="submit" class="btn">詳細</button>
+            </form>
+            <form action="{{ route('groups.leave', $group->id) }}" method="POST" style="display:inline;">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="btn1" onclick="return confirm('本当に退会しますか？');">退会</button>
+</form>
+
+        </div>
+    </li>
+    @endforeach -->
+
+
+
     @foreach ($userGroups as $userGroup)
     @php $group = $userGroup->group; @endphp
     <li>
@@ -46,7 +76,7 @@
             </form>
         </div>
     </li>
-    @endforeach
+@endforeach
     <p class="plist">※自身で作成したグループのみ詳細からグループ設定を変更することが出来ます。</p>
 </ul>
 @endif

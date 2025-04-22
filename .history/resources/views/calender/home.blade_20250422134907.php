@@ -251,18 +251,13 @@ $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
         $class = "";
 
         if ($day !== "") {
-            $dayDate = \Carbon\Carbon::parse($day); // Carbonで日付を扱いやすくする
-            $dayYear = $dayDate->year;
-            $dayMonth = $dayDate->month;
-            $dayDay = $dayDate->day;
-
             // 前月の日付の判定
-            if ($loop->parent->first && ($dayMonth != $month)) {
+            if ($loop->parent->first && $day > 20) {
                 $class = "prev-month";
             }
             // 翌月の日付の判定
-            elseif ($loop->parent->last && ($dayMonth != $month)) {
-                $class = "next-month";
+            elseif ($loop->parent->last && $day < 0) {
+                $class="next-month" ;
             }
             // 日曜（赤）
             elseif ($loop->index % 7 == 0) {
@@ -273,9 +268,8 @@ $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
                 $class = "saturday";
             }
         }
-
         @endphp
-        <td class="{{ $class }}" style="position: relative;" >
+        <td class="{{ $class }}" style="position: relative;" onclick="window.location.href='飛びたいパス';">
             @php
                 // 指定した日付に該当するイベントのみを取得
                 $e = $post->filter(function($event) use ($day) {

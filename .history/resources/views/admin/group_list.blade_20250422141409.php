@@ -48,6 +48,7 @@
     </li>
     @endforeach
     <p class="plist">※自身で作成したグループのみ詳細からグループ設定を変更することが出来ます。</p>
+    <p style="color: gold;">★</p>マークがついている
 </ul>
 @endif
     @if(session('success'))
