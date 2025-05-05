@@ -7,10 +7,22 @@
 @endsection
 @section('content')
 
+<!-- <br>
+    {{ $group->group_name }}のメンバー
+    参加ID：{{ $group->join_id }}
+    <br>
+    グループID：{{ $group->id }}
+    <br>
+    @if ($group->edit_flg == 1)
+        <p>編集・削除機能：有効</p>
+    @else
+        <p>編集・削除機能：無効</p>
+    @endif
+    <p>参加人数: {{ count($group->users) }} 人</p>
+    <br> -->
 
 @if($is_owner)
 <h1 class="h1">グループ情報の編集</h1>
-
 <p>グループ名：{{ $group->group_name }}　(現在)</p>
 <form id="edit" action="{{ route('groups.update', ['group' => $group->id]) }}" method="POST">
     @csrf
@@ -28,7 +40,14 @@
         <option value="0" {{ $group->edit_flg == 0 ? 'selected' : '' }}>無効</option>
     </select>
 
+    <!-- 変更するとメッセージが出る -->
+    @if(session('success'))
+    <p style="color: green;">{{ session('success') }}</p>
+    @endif
 
+    @if(session('error'))
+    <p style="color: red;">{{ session('error') }}</p>
+    @endif
     
 </form>
     <p>参加者：{{ count($group->users) }} 人</p>
@@ -54,7 +73,7 @@
 
 
 @else
-<h1 class="h1">グループ情報</h1>
+<h1>グループ情報</h1>
 
 <p>グループ名：{{ $group->group_name }}</p>
 
@@ -80,22 +99,14 @@
     @endif
 </ul>
 @endif
-@if($is_owner)
-    <!-- 変更するとメッセージが出る -->
-    @if(session('success'))
-    <p style="color: green;">{{ session('success') }}</p>
-    @endif
 
-    @if(session('error'))
-    <p style="color: red;">{{ session('error') }}</p>
-    @endif
 <button class="p-bottom" onclick="submitEditForm()">更新</button>
 <script>
     function submitEditForm() {
         document.getElementById('edit').submit();
     }
 </script>
-@endif
-<div><a href="{{ route('groups.list') }}">グループリストへ戻る</a></div>
+
+<a href="{{ route('groups.list') }}">グループリストへ戻る</a>
 
 @endsection

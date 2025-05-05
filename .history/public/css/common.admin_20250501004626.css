@@ -101,10 +101,8 @@ html, body {
   .list-container2 {
     display: block;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 20px auto;
     margin-bottom: 35px;
-    margin-right: auto;
-    margin-left: auto;
     width: 20%;
     border: 1px solid black;
     padding: 10px;

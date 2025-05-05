@@ -54,7 +54,7 @@
 
 
 @else
-<h1 class="h1">グループ情報</h1>
+<h1>グループ情報</h1>
 
 <p>グループ名：{{ $group->group_name }}</p>
 
@@ -80,7 +80,6 @@
     @endif
 </ul>
 @endif
-@if($is_owner)
     <!-- 変更するとメッセージが出る -->
     @if(session('success'))
     <p style="color: green;">{{ session('success') }}</p>
@@ -95,7 +94,7 @@
         document.getElementById('edit').submit();
     }
 </script>
-@endif
+
 <div><a href="{{ route('groups.list') }}">グループリストへ戻る</a></div>
 
 @endsection

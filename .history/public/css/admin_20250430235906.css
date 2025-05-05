@@ -78,7 +78,6 @@ button {
 }
 
 button:hover {
-  color: white;
   background-color: #444;
 }
 
@@ -485,5 +484,5 @@ button {
 }
 
 .p-bottom{
-  margin-bottom: 35px;
+  margin-bottom: 50px;
 }

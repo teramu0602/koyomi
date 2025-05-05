@@ -6,7 +6,7 @@
 @endsection
 @section('content')
 <div class="w600">
-    <h1 class="h1">スケジュール</h1>
+    <h1>スケジュール</h1>
     
     <div class="gname">
     <div>
@@ -58,10 +58,6 @@
             <textarea readonly class="form-control textarea">{{ $event->content ?? '（説明はありません）' }}</textarea>
         </div>
     </div>
-    @forelse ($event->groups as $group)
-        <a href="{{ route('group.home', ['id' => $group->id]) }}">戻る</a>
-    @empty
-        <a href="/calendar">戻る</a>
-    @endforelse
+    <a href="/calendar">戻る</a>
 </div>
 @endsection

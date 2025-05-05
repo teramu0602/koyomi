@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="w600">
-    <h1 class="h1">スケジュールを編集</h1>
+    <h1>スケジュールを編集</h1>
     @if(session('success'))
         <p style="color: green;">{{ session('success') }}</p>
     @endif

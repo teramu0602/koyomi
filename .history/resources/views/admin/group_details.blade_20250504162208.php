@@ -59,9 +59,9 @@
         </div>
     </div>
     @forelse ($event->groups as $group)
-        <a href="{{ route('group.home', ['id' => $group->id]) }}">戻る</a>
-    @empty
-        <a href="/calendar">戻る</a>
-    @endforelse
+            <a href="{{ route('group.home', ['id' => $group->id]) }}">戻る</a>
+        @empty
+            <a href="/calendar">戻る</a>
+        @endforelse
 </div>
 @endsection

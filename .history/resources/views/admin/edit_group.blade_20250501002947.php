@@ -10,7 +10,14 @@
 
 @if($is_owner)
 <h1 class="h1">グループ情報の編集</h1>
+    <!-- 変更するとメッセージが出る -->
+    @if(session('success'))
+    <p style="color: green;">{{ session('success') }}</p>
+    @endif
 
+    @if(session('error'))
+    <p style="color: red;">{{ session('error') }}</p>
+    @endif
 <p>グループ名：{{ $group->group_name }}　(現在)</p>
 <form id="edit" action="{{ route('groups.update', ['group' => $group->id]) }}" method="POST">
     @csrf
@@ -54,7 +61,7 @@
 
 
 @else
-<h1 class="h1">グループ情報</h1>
+<h1>グループ情報</h1>
 
 <p>グループ名：{{ $group->group_name }}</p>
 
@@ -80,22 +87,14 @@
     @endif
 </ul>
 @endif
-@if($is_owner)
-    <!-- 変更するとメッセージが出る -->
-    @if(session('success'))
-    <p style="color: green;">{{ session('success') }}</p>
-    @endif
 
-    @if(session('error'))
-    <p style="color: red;">{{ session('error') }}</p>
-    @endif
 <button class="p-bottom" onclick="submitEditForm()">更新</button>
 <script>
     function submitEditForm() {
         document.getElementById('edit').submit();
     }
 </script>
-@endif
+
 <div><a href="{{ route('groups.list') }}">グループリストへ戻る</a></div>
 
 @endsection

@@ -65,7 +65,7 @@
 @endif
 
 <p>参加者：{{ count($group->users) }} 人</p>
-<ul class="list-container2">
+<ul class="list-container2 p-bottom">
     @if ($group->users->isNotEmpty()) {{-- ユーザーがいるか確認 --}}
         参加リスト
         @foreach ($group->users as $user)

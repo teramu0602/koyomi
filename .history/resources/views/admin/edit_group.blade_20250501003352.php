@@ -54,7 +54,7 @@
 
 
 @else
-<h1 class="h1">グループ情報</h1>
+<h1>グループ情報</h1>
 
 <p>グループ名：{{ $group->group_name }}</p>
 

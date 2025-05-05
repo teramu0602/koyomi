@@ -98,20 +98,7 @@ html, body {
     border: 2px solid grey;
   }
 
-  .list-container2 {
-    display: block;
-    align-items: center;
-    margin-top: 20px;
-    margin-bottom: 35px;
-    margin-right: auto;
-    margin-left: auto;
-    width: 20%;
-    border: 1px solid black;
-    padding: 10px;
-    text-align: center;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-}
+
 
 .list-container2 ul {
     padding: 0;

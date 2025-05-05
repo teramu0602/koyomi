@@ -33,7 +33,7 @@
         </div>
     </div>
     <input type="hidden" name="group_id" value="{{$group_id}}">
-    <button type="submit" class="p-bottom">作成する</button>
+    <button type="submit">作成する</button>
   </form>
   <a href="{{ url()->previous() }}">戻る</a>
 </div>

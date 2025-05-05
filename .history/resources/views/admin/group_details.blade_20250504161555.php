@@ -58,10 +58,12 @@
             <textarea readonly class="form-control textarea">{{ $event->content ?? '（説明はありません）' }}</textarea>
         </div>
     </div>
+    <a href="/calendar">戻る</a>
+
     @forelse ($event->groups as $group)
-        <a href="{{ route('group.home', ['id' => $group->id]) }}">戻る</a>
-    @empty
-        <a href="/calendar">戻る</a>
-    @endforelse
+            <span class="text-bg">{{ $group->group_name }}の予定表</span>
+        @empty
+            <a href="/calendar">戻る</a>
+        @endforelse
 </div>
 @endsection

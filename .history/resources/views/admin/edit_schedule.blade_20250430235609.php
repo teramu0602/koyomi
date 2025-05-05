@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="w600">
-    <h1 class="h1">スケジュールを編集</h1>
+    <h1>スケジュールを編集</h1>
     @if(session('success'))
         <p style="color: green;">{{ session('success') }}</p>
     @endif
@@ -38,8 +38,8 @@
             <textarea name="content" class="form-control textarea" required>{{ old('content', $event->content) }}</textarea>
             </div>
         </div>
-        <button type="submit" class="p-bottom">更新する</button>
+        <button type="submit">更新する</button>
     </form>
-    <a href="{{ url()->previous() }}">戻る</a>
+    <div><a href="{{ url()->previous() }}">戻る</a></div>
 </div>
 @endsection

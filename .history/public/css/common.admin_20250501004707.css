@@ -103,8 +103,7 @@ html, body {
     align-items: center;
     margin-top: 20px;
     margin-bottom: 35px;
-    margin-right: auto;
-    margin-left: auto;
+    margin: auto;
     width: 20%;
     border: 1px solid black;
     padding: 10px;
