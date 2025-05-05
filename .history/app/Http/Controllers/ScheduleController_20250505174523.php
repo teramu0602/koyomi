@@ -54,7 +54,6 @@ class ScheduleController extends Controller
             'start_time' => 'nullable',
             'end_time'   => 'nullable',
             'group_id' =>'nullable',
-            'color'  => 'nullable', //追加　nullableの編集をする！
         ]);
 
 
@@ -68,7 +67,6 @@ class ScheduleController extends Controller
         $calendar['event_end_date'] = $request->end_date;
         $calendar['event_start_time'] = $request->start_time;
         $calendar['event_end_time'] = $request->end_time;
-        $calendar['color'] = $request->color;
 
         $calendar->save();
 
@@ -77,8 +75,11 @@ class ScheduleController extends Controller
             'group_id' => $request->group_id
 
         ]);
-        return redirect()->route('group.home', ['id' => $request->group_id])
-        ->with('success', 'スケジュールを作成しました。');
+        
+
+        return redirect()->route('groupCalendarAdd', ['group_id' => $request->group_id])
+                 ->with('success', 'スケジュールを作成しました！');
+
     }
 
 

@@ -196,13 +196,15 @@ $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
                 </div>
             @endif
             <div class = "calendar_title">
+
+                <!-- @foreach($e as $event)
+                    <div>{{ $event->title }}</div>
+                @endforeach -->
                 @foreach($e as $event)
-                    <div style="background-color: {{ $event->color }}; padding: 2px; margin-bottom: 2px; border-radius: 4px; color: #fff;">
-                        <a href="{{ route('group.details', ['id' => $event->id]) }}" style="color: black; text-decoration: none;">
-                            {{ $event->title }}
-                        </a>
-                    </div>
-                @endforeach
+                <div>
+                    <a href="{{ route('group.details', ['id' => $event->id]) }}">{{ $event->title }}</a>
+                </div>
+        @endforeach
             </div>
         </td>
         @endforeach

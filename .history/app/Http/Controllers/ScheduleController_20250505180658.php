@@ -77,8 +77,11 @@ class ScheduleController extends Controller
             'group_id' => $request->group_id
 
         ]);
-        return redirect()->route('group.home', ['id' => $request->group_id])
-        ->with('success', 'スケジュールを作成しました。');
+        
+
+        return redirect()->route('groupCalendarAdd', ['group_id' => $request->group_id])
+                 ->with('success', 'スケジュールを作成しました！');
+
     }
 
 
@@ -129,7 +132,8 @@ class ScheduleController extends Controller
             'title' => $request->title,
         ]);
         \Log::info('更新後: ', $event->toArray());
-        return redirect()->route('group.edit', ['id' => $event->id])->with('success', 'イベント内容を更新しました。');
+        return redirect()->route('group.home', ['id' => $request->group_id])
+        ->with('success', 'スケジュールを作成しました。');
     }
 
     public function destroy($id)

@@ -34,7 +34,6 @@
     </div>
     <input type="hidden" name="group_id" value="{{$group_id}}">
     <button type="submit" class="p-bottom">作成する</button>
-    <input type="hidden" name="color" id="color">
   </form>
   <a href="{{ url()->previous() }}">戻る</a>
   <script>

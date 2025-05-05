@@ -77,8 +77,11 @@ class ScheduleController extends Controller
             'group_id' => $request->group_id
 
         ]);
-        return redirect()->route('group.home', ['id' => $request->group_id])
-        ->with('success', 'スケジュールを作成しました。');
+        
+
+        return redirect()->route('groupCalendarAdd', ['group_id' => $request->group_id])
+                 ->with('success', 'スケジュールを作成しました！');
+
     }
 
 

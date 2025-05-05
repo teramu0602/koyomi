@@ -89,7 +89,50 @@ $firstDayOfPreviousMonthFormatted = date('j', $firstDayOfPreviousMonth); // 日�
 $lastmonthday = $lastDayOfPreviousMonth-$startWeekday+1;
 $nextmonthday = 1;
 
+// カレンダー配列を作成
+$calendar = [];
+$row = [];
+for ($i = 0; $i < $startWeekday; $i++) {
+    $row[]=$lastmonthday++;
+}
+for ($day=1; $day <=$lastDay; $day++) {
+    $row[]=$day;
+    if (count($row)==7) {
+        $calendar[]=$row;
+        $row=[];
+    }
+}
 
+for ($i=0; $i < 6-$lastWeekday; $i++) {
+    $row[]=$nextmonthday++;
+}
+
+
+$calendar[]=$row;
+
+// 翌月の最初の数日をグレーにする
+$nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
+@endphp
+
+
+
+<div class="switch">
+    <a class="who">あなたの予定表</a>
+    <a class="month_toggle" href="{{ url('/admin/home/' . $prevYear . '/' . $prevMonth) }}">◀</a>
+    　{{ $year }}年　{{ $month }}月　
+    <a class="month_toggle" href="{{ url('/admin/home/' . $nextYear . '/' . $nextMonth) }}">▶</a>
+
+
+    <form action="{{ route('groups.list') }}" method="GET" style="display: inline;">
+        <button type="submit" class="switch_button {{ request()->is('grouplist') ? 'active' : '' }}">グループ</button>
+    </form>
+    <form action="{{ route('createschedule') }}" method="GET" style="display: inline;">
+        <button type="submit" >予定作成</button>
+    </form>
+</div>
+
+
+@php
 // カレンダー配列を作成
 $calendar = [];
 $row = [];
@@ -113,28 +156,6 @@ $calendar[] = $row;
 // 翌月の最初の数日をグレーにする
 $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
 @endphp
-
-
-
-<div class="group_color">
-    <a class="who2">{{ $group->group_name }}の予定表</a>
-    <a class="month_toggle" href="{{ url('/group_home/' . $group->id . '/'. $prevYear . '/' . $prevMonth) }}">◀</a>
-    　{{ $year }}年　{{ $month }}月　
-    <a class="month_toggle" href="{{ url('/group_home/' . $group->id . '/'. $nextYear . '/' . $nextMonth) }}">▶</a>
-
-
-    <form action="{{ route('calendar') }}" method="GET" style="display: inline;">
-        <button type="submit" class="switch_button {{ request()->is('personal') ? 'active' : '' }}">ホーム</button>
-    </form>
-    <form action="{{ route('groups.list') }}" method="GET" style="display: inline;">
-        <button type="submit"  {{ request()->is('grouplist') ? 'active' : '' }}">グループ</button>
-    </form>
-    <form action="{{ route('groupCalendarAdd', ['group_id' => $group->id]) }}" method="GET" style="display: inline;">
-        <button type="submit" >予定作成</button>
-    </form>
-</div>
-
-
 
 
 <table>
@@ -182,13 +203,16 @@ $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
             @php
                 // 指定した日付に該当するイベントのみを取得
                 $e = $post->filter(function($event) use ($day) {
-                    return $event->event_start_date === $day
-                    && Auth::check() // ログインしているか確認
-                    && $event->user_id === Auth::id(); // イベントの所有者がログインユーザーか確認
-                    
-                });
+    return 
+    ($event->event_start_date === $day 
+        || ($event->event_start_date < $day && $event->event_end_date > $day) 
+        || $event->event_end_date === $day)
+    && Auth::check() // ログインしているか確認
+    && $event->user_id === Auth::id() // イベントの所有者がログインユーザーか確認
+    && $event->calendar_groups->isEmpty(); // 個人の予定かどうかを識別
+})->sortBy('event_start_date');
             @endphp
-            <div class="date">{{ (int)substr($day, 8, 2) }}</div>
+            <div>{{ (int)substr($day, 8, 2) }}</div>
             {{-- イベント数のバッジ（0件は表示しない） --}}
             @if ($e->count() > 0)
                 <div class="event-count-badge">
@@ -196,6 +220,11 @@ $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
                 </div>
             @endif
             <div class = "calendar_title">
+
+                <!-- @foreach($e as $event)
+                    <div>{{ $event->title }}</div>
+                @endforeach -->
+
                 @foreach($e as $event)
                     <div style="background-color: {{ $event->color }}; padding: 2px; margin-bottom: 2px; border-radius: 4px; color: #fff;">
                         <a href="{{ route('group.details', ['id' => $event->id]) }}" style="color: black; text-decoration: none;">

@@ -93,7 +93,8 @@ class ScheduleController extends Controller
             return redirect()->back()->with('error', 'このイベントは編集できません。');
         }
     
-        return view('admin.edit_schedule', compact('event'));
+        return redirect()->route('group.home', ['id' => $request->group_id])
+        ->with('success', 'スケジュールを作成しました。');
     }
     
 

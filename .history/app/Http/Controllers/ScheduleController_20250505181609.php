@@ -102,6 +102,7 @@ class ScheduleController extends Controller
     public function s_update(Request $request, $id)
     {
         $event = Calendar::with('groups')->findOrFail($id);
+        $groupId = $request->input('group_id'); // group_id をしっかり取得
     
         // $canEdit = $event->groups->contains(function ($group) {
         //     return $group->edit_flg == 1;
@@ -129,7 +130,8 @@ class ScheduleController extends Controller
             'title' => $request->title,
         ]);
         \Log::info('更新後: ', $event->toArray());
-        return redirect()->route('group.edit', ['id' => $event->id])->with('success', 'イベント内容を更新しました。');
+        return redirect()->route('group.home', ['id' => $request->group_id])
+        ->with('success', 'スケジュールを作成しました。');
     }
 
     public function destroy($id)

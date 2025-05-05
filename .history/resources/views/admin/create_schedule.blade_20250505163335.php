@@ -35,35 +35,17 @@
     </form>
     <a href="{{ url()->previous() }}">戻る</a>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const getPastelColor = () => {
-                const colorType = ['yellow', 'green', 'blue'];
-                const pick = colorType[Math.floor(Math.random() * colorType.length)];
+    document.addEventListener("DOMContentLoaded", function () {
+        const getRandomColorValue = () => Math.floor(Math.random() * 256); // 0〜255
 
-                let r = 200, g = 200, b = 200; // 初期値
+        const r = getRandomColorValue();
+        const g = getRandomColorValue();
+        const b = getRandomColorValue();
 
-                if (pick === 'yellow') {
-                    r = 255;
-                    g = 255;
-                    b = Math.floor(Math.random() * 100); // 少しだけ青
-                } else if (pick === 'green') {
-                    r = Math.floor(Math.random() * 100) + 100; // 中程度の赤
-                    g = 255;
-                    b = Math.floor(Math.random() * 100); // 青少なめ
-                } else if (pick === 'blue') {
-                    r = Math.floor(Math.random() * 100); // 赤少なめ
-                    g = Math.floor(Math.random() * 150) + 100; // 中〜高の緑
-                    b = 255;
-                }
-
-                return `rgb(${r}, ${g}, ${b})`;
-            };
-
-            const color = getPastelColor();
-            document.getElementById('color').value = color;
-        });
-    </script>
-
+        const rgb = `rgb(${r}, ${g}, ${b})`;
+        document.getElementById('color').value = rgb;
+    });
+</script>
 </div>
 
 @endsection
