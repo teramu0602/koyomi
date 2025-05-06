@@ -30,7 +30,7 @@
         <button type="submit">作成する</button>
     </form>
         <div>
-            <a href="{{ url()->previous() }}" style="margin-top:15px; display:inline-block;">戻る</a>
+            <a href="{{ url()->previous() }}" style= "margin top:15px;">戻る</a>
         </div>
         @error('group_name')
             <p style="color: red;">{{ $message }}</p>

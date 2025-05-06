@@ -3,7 +3,7 @@
 @section('title', 'ログイン')
 
 @section('content')
-    <h2 style="margin-top:70px;">ログイン</h2>
+    <h2 style="margin-top:70px;>ログイン</h2>
     <form method="POST" action="{{ route('login') }}">
         @csrf
         <label for="name">ユーザー名</label>

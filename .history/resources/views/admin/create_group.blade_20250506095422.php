@@ -29,9 +29,7 @@
         </div>
         <button type="submit">作成する</button>
     </form>
-        <div>
-            <a href="{{ url()->previous() }}" style="margin-top:15px; display:inline-block;">戻る</a>
-        </div>
+    <a href="{{ url()->previous() }}">戻る</a>
         @error('group_name')
             <p style="color: red;">{{ $message }}</p>
         @enderror

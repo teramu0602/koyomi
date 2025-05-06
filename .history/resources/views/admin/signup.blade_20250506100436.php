@@ -2,7 +2,7 @@
 @section('title', 'sign up')
 
 @section('content')
-<h2 style="margin-top:70px;">アカウントの作成</h2>
+<h2 style="margin-top:70px;display:inline-block;">アカウントの作成</h2>
 <form action="{{ route('register') }}" method="POST">
     @csrf
     <label for="name">ユーザー名</label>

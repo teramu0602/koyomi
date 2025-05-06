@@ -48,8 +48,7 @@
     </li>
     @endforeach
     <p class="plist">※自身で作成したグループのみ詳細からグループ設定を変更することが出来ます。</p>
-    <p class="plist" style="margin-top: 0;">※<span style="color: gold;">★</span>マークはグループオーナーであることを示します。</p>
-    <a href="{{ url()->previous() }}">戻る</a>
+    <a href="{{ url()->previous() }}">前の画面に戻る</a>
 </ul>
 @endif
     @if(session('success'))
