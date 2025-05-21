@@ -22,9 +22,9 @@ use App\Http\Controllers\ScheduleController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/admin', function () {
     return view('layouts/admin_calender');
@@ -49,7 +49,7 @@ Route::get('/admin/home', function () {
     return view('calender/home');
 });
 
-Route::get('/calendar', [CalendarController::class, 'index'])
+Route::get('/', [CalendarController::class, 'index'])
     ->name('calendar')
     ->middleware('auth');
 

@@ -70,9 +70,9 @@
 @endphp
 
 @if ($backUrl)
-    <a href="{{ $isInvalid ? route('calendar') : $backUrl }}" class="btn btn-secondary">戻る</a>
+    <a href="{{ $isInvalid ? route('calendar') : $backUrl }}">戻る</a>
     @else
-    <a href="{{  route('calendar') }}" class="btn btn-secondary">戻る</a>
+    <a href="{{  route('calendar') }}">戻る</a>
 @endif
 
 
