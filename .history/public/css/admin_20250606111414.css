@@ -520,12 +520,12 @@ button {
 .menu-icon{
   display: none;
 }
+.floating-btn {
+  display: none;
+}
 
+.floating-btn:hover {
 
-@media (min-width: 850px) {
-  .floating-btn {
-    display: none;
-  }
 }
 /* スマホ表示ではドロップダウンを非表示 */
 @media (max-width: 850px) {

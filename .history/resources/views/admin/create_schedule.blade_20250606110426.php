@@ -36,7 +36,7 @@
     <a href="{{ route('calendar') }}" class="return">戻る</a>
 
     <a href="{{ route('calendar') }}" class="floating-btn">
-    ⌂
+    ＋
     </a>
     <script>
         document.addEventListener("DOMContentLoaded", function () {

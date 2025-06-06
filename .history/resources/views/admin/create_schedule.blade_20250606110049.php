@@ -10,16 +10,17 @@
     <form action="{{ route('schedule.store') }}" method="POST">
         @csrf
         <div class="left">
-            <p class="date-group">
-                <span>日付</span>　
-                <span class="input-block">開始：<input type="date" name="start_date" class="w70in"></span>　　
-                <span class="input-block">終了：<input type="date" name="end_date" class="w70in"></span>
-            </p>
-            <p class="time-group">
-                <span>時間</span>　
-                <span class="input-block">開始：<input type="time" name="start_time" class="w70in"></span>　　
-                <span class="input-block">終了：<input type="time" name="end_time" class="w70in"></span>
-            </p>
+        <p class="date-group">
+    <span>日付</span>　
+    <span class="input-block">開始：<input type="date" name="start_date" class="w70in"></span>　　
+    <span class="input-block">終了：<input type="date" name="end_date" class="w70in"></span>
+</p>
+
+<p class="time-group">
+    <span>時間</span>　
+    <span class="input-block">開始：<input type="time" name="start_time" class="w70in"></span>　　
+    <span class="input-block">終了：<input type="time" name="end_time" class="w70in"></span>
+</p>
             <div class="form-group">
                 <p>タイトル</p>
                 <input type="text" name="title" class="form-control">
@@ -36,8 +37,8 @@
     <a href="{{ route('calendar') }}" class="return">戻る</a>
 
     <a href="{{ route('calendar') }}" class="floating-btn">
-    ⌂
-    </a>
+    ＋
+</a>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const getPastelColor = () => {

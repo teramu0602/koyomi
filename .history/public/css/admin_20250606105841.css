@@ -520,13 +520,6 @@ button {
 .menu-icon{
   display: none;
 }
-
-
-@media (min-width: 850px) {
-  .floating-btn {
-    display: none;
-  }
-}
 /* スマホ表示ではドロップダウンを非表示 */
 @media (max-width: 850px) {
   .nav-item.dropdown {
@@ -593,27 +586,6 @@ button {
   color: #333;
 }
 
-.floating-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 60px;
-  height: 60px;
-  background-color: orange; /* 青系、好みに合わせて */
-  color: white;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 55px;
-  font-size: 45px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  text-decoration: none;
-  z-index: 1000;
-  transition: background-color 0.3s ease;
-}
-
-.floating-btn:hover {
-  background-color: 	#e69500;
-}
 }
 .date-group,
 .time-group {
@@ -663,7 +635,7 @@ h1{
 .service-name{
   font-size: 40px;
 }
-.return{
+a{
   padding-bottom: 30px;
 }
 .p-bottom{
@@ -675,4 +647,25 @@ h1{
   margin-left: 50px;
 }
 
+.floating-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background-color: #007bff; /* 青系、好みに合わせて */
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 60px;
+  font-size: 28px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+.floating-btn:hover {
+  background-color: #0056b3;
+}
 }

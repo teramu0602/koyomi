@@ -20,7 +20,7 @@
 
 
     <!-- ドロップダウンのｃｓｓ-->
-    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">  -->
+<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">  -->
 
 
 
@@ -32,7 +32,7 @@
         <a class="logo" href="{{ route('calendar') }}">
             <img src="{{ asset('img/logo.jpg')}}" alt="ロゴ">
         </a>
-
+        
         <h1 class="service-name">KOYOMI</h1>
         @guest
 
@@ -55,27 +55,6 @@
             </div>
 
         </li>
-        <nav class="navbar">
-
-            <!-- ハンバーガートグル -->
-            <input type="checkbox" id="menu-toggle">
-            <label for="menu-toggle" class="menu-icon">☰</label>
-
-            <ul class="nav-links">
-                <li>
-                    <a href="{{ route('logout') }}" class = a1
-                        onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
-                        ログアウト
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                </li>
-            </ul>
-        </nav>
-
-
         @endguest
 
     </header>

@@ -520,13 +520,6 @@ button {
 .menu-icon{
   display: none;
 }
-
-
-@media (min-width: 850px) {
-  .floating-btn {
-    display: none;
-  }
-}
 /* スマホ表示ではドロップダウンを非表示 */
 @media (max-width: 850px) {
   .nav-item.dropdown {
@@ -535,9 +528,6 @@ button {
 }
 /* スマホ用 */
 @media (max-width: 850px) {
-  header{
-    padding: 0;
-  }
   .nav-links {
     display: none;
     flex-direction: column;
@@ -593,27 +583,6 @@ button {
   color: #333;
 }
 
-.floating-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 60px;
-  height: 60px;
-  background-color: orange; /* 青系、好みに合わせて */
-  color: white;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 55px;
-  font-size: 45px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  text-decoration: none;
-  z-index: 1000;
-  transition: background-color 0.3s ease;
-}
-
-.floating-btn:hover {
-  background-color: 	#e69500;
-}
 }
 .date-group,
 .time-group {
@@ -621,7 +590,7 @@ button {
     flex-wrap: wrap;
     align-items: center;
     gap: 12px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 /* 幅600px以下で折り返す */
@@ -638,8 +607,7 @@ button {
     display: flex;
     align-items: center;
     gap: 4px;
-    white-space: nowrap;
-    width: 300px;
+    width: 200px;
 }
   .w70in{
     width: 80%;
@@ -654,25 +622,4 @@ button {
   .textarea{
     height: 75px;
   }
-  p {
-    line-height: 0.5; /* 通常は 1.4～1.8 くらいが読みやすい */
-}
-h1{
-  font-size: 20px;
-}
-.service-name{
-  font-size: 40px;
-}
-.return{
-  padding-bottom: 30px;
-}
-.p-bottom{
-  margin-top: 0;
-}
-
-/* オレンジの部分 */
-.switch_button{
-  margin-left: 50px;
-}
-
 }

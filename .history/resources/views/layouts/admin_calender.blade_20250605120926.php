@@ -62,8 +62,9 @@
             <label for="menu-toggle" class="menu-icon">☰</label>
 
             <ul class="nav-links">
+                <li>{{ Auth::user()->name }}</li>
                 <li>
-                    <a href="{{ route('logout') }}" class = a1
+                    <a href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
                         ログアウト
