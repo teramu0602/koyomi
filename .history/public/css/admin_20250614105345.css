@@ -765,21 +765,12 @@ h1{
 
 .label_n{
   word-wrap: normal;
-  white-space: normal;
-  line-height: 1;
+  white-space: none;
 }
 
 .w400{
-  white-space: normal;
+  white-space: none;
 }
-
-.joinctn{
-  margin-top: 50px;
-}
-}
-
-@media (max-width: 600px){
-
 }
 
 

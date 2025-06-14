@@ -708,9 +708,9 @@ h1{
 
   .calendar-table th,
   .calendar-table td {
-    width: 150px;
-    min-width: 150px;
-    max-width: 150px;
+    width: 200px;
+    min-width: 200px;
+    max-width: 200px;
 
     vertical-align: top;
     padding: 10px;
@@ -719,8 +719,8 @@ h1{
   }
 
   .calendar-table td{
-    height: 150px;       /* 追加：高さを固定 */
-    min-height: 150px;   /* 念のため：最小高さも指定 */
+    height: 200px;       /* 追加：高さを固定 */
+    min-height: 200px;   /* 念のため：最小高さも指定 */
   }
 }
 
@@ -730,13 +730,13 @@ h1{
   display: block;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 10% 10px 10%;
+  padding: 35px 10% 35px 10%;
 }
 
 .calendar_menu1 {
   background-color: rgb(19, 156, 19);
   font-size: 20px;
-  display: block;
+  display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 35px 10% 35px 10%;
@@ -747,12 +747,10 @@ h1{
   align-items: center;
   gap: 10px;
   justify-content: center;
-  margin-bottom: 10px;
 }
 
 .calendar_menu_left{
   align-items: center;
-  margin-bottom: 10px;
 }
 
 .calendar_menu_right{
@@ -762,24 +760,5 @@ h1{
 .switch_button{
   margin: 0;
 }
-
-.label_n{
-  word-wrap: normal;
-  white-space: normal;
-  line-height: 1;
 }
-
-.w400{
-  white-space: normal;
-}
-
-.joinctn{
-  margin-top: 50px;
-}
-}
-
-@media (max-width: 600px){
-
-}
-
 

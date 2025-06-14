@@ -772,10 +772,6 @@ h1{
 .w400{
   white-space: normal;
 }
-
-.joinctn{
-  margin-top: 50px;
-}
 }
 
 @media (max-width: 600px){

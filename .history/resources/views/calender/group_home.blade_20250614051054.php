@@ -143,80 +143,76 @@ $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
 
 
 
-<div class="calendar-wrapper">
-    <table class="calendar-table">
-        <tr>
-            <th class="red">日</th>
-            <th>月</th>
-            <th>火</th>
-            <th>水</th>
-            <th>木</th>
-            <th>金</th>
-            <th class="blue">土</th>
-        </tr>
-        @foreach ($calendar as $week)
-        <tr>
-            @foreach ($week as $day)
-            @php
-            $class = "";
-    
-            if ($day !== "") {
-                $dayDate = \Carbon\Carbon::parse($day); // Carbonで日付を扱いやすくする
-                $dayYear = $dayDate->year;
-                $dayMonth = $dayDate->month;
-                $dayDay = $dayDate->day;
-    
-                // 前月の日付の判定
-                if ($loop->parent->first && ($dayMonth != $month)) {
-                    $class = "prev-month";
-                }
-                // 翌月の日付の判定
-                elseif ($loop->parent->last && ($dayMonth != $month)) {
-                    $class = "next-month";
-                }
-                // 日曜（赤）
-                elseif ($loop->index % 7 == 0) {
-                    $class = "sunday";
-                }
-                // 土曜（青）
-                elseif ($loop->index % 7 == 6) {
-                    $class = "saturday";
-                }
+<table>
+    <tr>
+        <th class="red">日</th>
+        <th>月</th>
+        <th>火</th>
+        <th>水</th>
+        <th>木</th>
+        <th>金</th>
+        <th class="blue">土</th>
+    </tr>
+    @foreach ($calendar as $week)
+    <tr>
+        @foreach ($week as $day)
+        @php
+        $class = "";
+
+        if ($day !== "") {
+            $dayDate = \Carbon\Carbon::parse($day); // Carbonで日付を扱いやすくする
+            $dayYear = $dayDate->year;
+            $dayMonth = $dayDate->month;
+            $dayDay = $dayDate->day;
+
+            // 前月の日付の判定
+            if ($loop->parent->first && ($dayMonth != $month)) {
+                $class = "prev-month";
             }
-    
+            // 翌月の日付の判定
+            elseif ($loop->parent->last && ($dayMonth != $month)) {
+                $class = "next-month";
+            }
+            // 日曜（赤）
+            elseif ($loop->index % 7 == 0) {
+                $class = "sunday";
+            }
+            // 土曜（青）
+            elseif ($loop->index % 7 == 6) {
+                $class = "saturday";
+            }
+        }
+
+        @endphp
+        <td class="{{ $class }}" style="position: relative;" >
+            @php
+                // 指定した日付に該当するイベントのみを取得
+                $e = $post->filter(function($event) use ($day) {
+                    return $event->event_start_date === $day
+                    && Auth::check(); // ログインしているか確認
+                    
+                });
             @endphp
-            <td class="{{ $class }}" style="position: relative;" >
-                @php
-                    // 指定した日付に該当するイベントのみを取得
-                    $e = $post->filter(function($event) use ($day) {
-                        return $event->event_start_date === $day
-                        && Auth::check(); // ログインしているか確認
-    
-                    });
-                @endphp
-                <div class="date">{{ (int)substr($day, 8, 2) }}</div>
-                {{-- イベント数のバッジ（0件は表示しない） --}}
-                @if ($e->count() > 0)
-                    <div class="event-count-badge">
-                        {{ $e->count() }}
-                    </div>
-                @endif
-                <div class = "calendar_title">
-                    @foreach($e as $event)
-                        <div style="background-color: {{ $event->color }}; padding: 2px; margin-bottom: 2px; border-radius: 4px; color: #fff;">
-                            <a href="{{ route('group.details', ['id' => $event->id]) }}" style="color: black; text-decoration: none;">
-                                {{ $event->title }}
-                            </a>
-                        </div>
-                    @endforeach
+            <div class="date">{{ (int)substr($day, 8, 2) }}</div>
+            {{-- イベント数のバッジ（0件は表示しない） --}}
+            @if ($e->count() > 0)
+                <div class="event-count-badge">
+                    {{ $e->count() }}
                 </div>
-            </td>
-            @endforeach
-        </tr>
+            @endif
+            <div class = "calendar_title">
+                @foreach($e as $event)
+                    <div style="background-color: {{ $event->color }}; padding: 2px; margin-bottom: 2px; border-radius: 4px; color: #fff;">
+                        <a href="{{ route('group.details', ['id' => $event->id]) }}" style="color: black; text-decoration: none;">
+                            {{ $event->title }}
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+        </td>
         @endforeach
-    </table>
-</div>
-<a href="{{ route('calendar') }}" class="floating-btn">
-    ⌂
-</a>
+    </tr>
+    @endforeach
+</table>
+
 @endsection

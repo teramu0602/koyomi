@@ -762,24 +762,5 @@ h1{
 .switch_button{
   margin: 0;
 }
-
-.label_n{
-  word-wrap: normal;
-  white-space: normal;
-  line-height: 1;
 }
-
-.w400{
-  white-space: normal;
-}
-
-.joinctn{
-  margin-top: 50px;
-}
-}
-
-@media (max-width: 600px){
-
-}
-
 

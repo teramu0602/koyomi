@@ -152,11 +152,7 @@ html, body {
 .btn2:hover {
     background-color: #bfbfbf;
 }
-@media (max-width: 1500px){
-    .list-container2{
-        width: 40%;
-    }
-  }
+
 @media (max-width: 700px){
     .list-container{
       width: 80%;
@@ -183,8 +179,9 @@ html, body {
         width: 80%;
     }
 
-    select{
-        padding: 10px;
+  }
+  @media (max-width: 1500px){
+    .list-container2{
+        width: 40%;
     }
-
   }

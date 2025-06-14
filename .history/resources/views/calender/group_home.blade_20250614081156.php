@@ -89,56 +89,7 @@ $firstDayOfPreviousMonthFormatted = date('j', $firstDayOfPreviousMonth); // 日�
 $lastmonthday = $lastDayOfPreviousMonth-$startWeekday+1;
 $nextmonthday = 1;
 
-// カレンダー配列を作成
-$calendar = [];
-$row = [];
-for ($i = 0; $i < $startWeekday; $i++) {
-    $row[]=$lastmonthday++;
-}
-for ($day=1; $day <=$lastDay; $day++) {
-    $row[]=$day;
-    if (count($row)==7) {
-        $calendar[]=$row;
-        $row=[];
-    }
-}
 
-for ($i=0; $i < 6-$lastWeekday; $i++) {
-    $row[]=$nextmonthday++;
-}
-
-
-$calendar[]=$row;
-
-// 翌月の最初の数日をグレーにする
-$nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
-@endphp
-
-
-
-<div class="calendar_menu">
-    <div class="calendar_menu_left">
-        <a class="who">あなたの予定表</a>
-    </div>
-    <div class="calendar_menu_center">
-        <a class="month_toggle" href="{{ url('/admin/home/' . $prevYear . '/' . $prevMonth) }}">◀</a>
-         {{ $year }}年　{{ $month }}月　
-        <a class="month_toggle" href="{{ url('/admin/home/' . $nextYear . '/' . $nextMonth) }}">▶</a>
-    </div>
-    <div class="calendar_menu_right">
-        <form action="{{ route('groups.list') }}" method="GET" style="display:inline;">
-            <input type="hidden" name="from" value="calendar">
-            <button class="switch_button">グループ</button>
-        </form>
-
-        <form action="{{ route('createschedule') }}" method="GET" style="display: inline;">
-            <button type="submit" >予定作成</button>
-        </form>
-    </div>
-</div>
-
-
-@php
 // カレンダー配列を作成
 $calendar = [];
 $row = [];
@@ -162,6 +113,34 @@ $calendar[] = $row;
 // 翌月の最初の数日をグレーにする
 $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
 @endphp
+
+
+
+<div class="calendar_menu1">
+        <div class="calendar_menu_left">
+            <a class="who2">{{ $group->group_name }}の予定表</a>
+        </div>
+        <div class="calendar_menu_center">
+            <a class="month_toggle" href="{{ url('/group_home/' . $group->id . '/'. $prevYear . '/' . $prevMonth) }}">◀</a>
+            　{{ $year }}年　{{ $month }}月
+            <a class="month_toggle" href="{{ url('/group_home/' . $group->id . '/'. $nextYear . '/' . $nextMonth) }}">▶</a>
+        </div>
+    
+        <div class="calendar_menu_right">
+            <form action="{{ route('calendar') }}" method="GET" style="display: inline;">
+                <button type="submit" class="switch_button2 {{ request()->is('personal') ? 'active' : '' }}">ホーム</button>
+            </form>
+            <form action="{{ route('groups.list') }}" method="GET" style="display: inline;">
+                <input type="hidden" name="from" value="{{ url()->full() }}">
+                <button type="submit" class="btn">グループ</button>
+            </form>
+            <form action="{{ route('groupCalendarAdd', ['group_id' => $group->id]) }}" method="GET" style="display: inline;">
+                <button type="submit" >予定作成</button>
+            </form>
+        </div>
+</div>
+
+
 
 
 <div class="calendar-wrapper">
@@ -210,14 +189,10 @@ $nextMonthDays=range($lastmonthday-$weekday-1, $lastDayOfPreviousMonth);
                 @php
                     // 指定した日付に該当するイベントのみを取得
                     $e = $post->filter(function($event) use ($day) {
-                    return
-                    ($event->event_start_date === $day
-                        || ($event->event_start_date < $day && $event->event_end_date > $day)
-                        || $event->event_end_date === $day)
-                    && Auth::check() // ログインしているか確認
-                    && $event->user_id === Auth::id() // イベントの所有者がログインユーザーか確認
-                    && $event->calendar_groups->isEmpty(); // 個人の予定かどうかを識別
-                    })->sortBy('event_start_date');
+                        return $event->event_start_date === $day
+                        && Auth::check(); // ログインしているか確認
+    
+                    });
                 @endphp
                 <div class="date">{{ (int)substr($day, 8, 2) }}</div>
                 {{-- イベント数のバッジ（0件は表示しない） --}}

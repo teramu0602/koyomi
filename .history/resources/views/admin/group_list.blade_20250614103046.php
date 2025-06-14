@@ -77,7 +77,7 @@
 
 <a href="{{ route('calendar') }}" class="floating-btn">
     ⌂
-</a>
+    </a>
 
     @if(session('success'))
     <p style="color: green;">{{ session('success') }}</p>

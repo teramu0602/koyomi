@@ -79,6 +79,7 @@ button {
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+  
 }
 
 button:hover {
@@ -188,15 +189,6 @@ th {
 
 .calendar_menu {
   background-color: orange;
-  font-size: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 35px 10% 35px 10%;
-}
-
-.calendar_menu1 {
-  background-color: rgb(19, 156, 19);
   font-size: 20px;
   display: flex;
   justify-content: space-between;
@@ -351,7 +343,7 @@ table {
 .who2 {
   background-color: rgb(160, 212, 153);
   font-size: 20px;
-
+  margin-right: 400px;
 }
 
 .none {
@@ -691,95 +683,3 @@ h1{
 }
 
 }
-
-@media (max-width: 1500px) {
-  .calendar-wrapper {
-    overflow-x: auto;       /* 横スクロールを有効にする */
-    -webkit-overflow-scrolling: touch; /* スマホでスムーズに */
-  }
-  
-  .calendar-table {
-    min-width: 700px;       /* 横幅が狭い画面でも崩れずスクロールできる */
-    width: 100%;            /* 通常画面では広がる */
-    table-layout: fixed;
-    min-width: 1400px;    /* セル幅が均等に保たれる */
-    margin: 0 20px 20px 20px;
-  }
-
-  .calendar-table th,
-  .calendar-table td {
-    width: 150px;
-    min-width: 150px;
-    max-width: 150px;
-
-    vertical-align: top;
-    padding: 10px;
-    box-sizing: border-box;
-    overflow: hidden;
-  }
-
-  .calendar-table td{
-    height: 150px;       /* 追加：高さを固定 */
-    min-height: 150px;   /* 念のため：最小高さも指定 */
-  }
-}
-
-@media (max-width: 700px){.calendar_menu {
-  background-color: orange;
-  font-size: 20px;
-  display: block;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 10% 10px 10%;
-}
-
-.calendar_menu1 {
-  background-color: rgb(19, 156, 19);
-  font-size: 20px;
-  display: block;
-  justify-content: space-between;
-  align-items: center;
-  padding: 35px 10% 35px 10%;
-}
-
-.calendar_menu_center {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  justify-content: center;
-  margin-bottom: 10px;
-}
-
-.calendar_menu_left{
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.calendar_menu_right{
-  align-items: center;
-}
-
-.switch_button{
-  margin: 0;
-}
-
-.label_n{
-  word-wrap: normal;
-  white-space: normal;
-  line-height: 1;
-}
-
-.w400{
-  white-space: normal;
-}
-
-.joinctn{
-  margin-top: 50px;
-}
-}
-
-@media (max-width: 600px){
-
-}
-
-
